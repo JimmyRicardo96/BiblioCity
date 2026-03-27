@@ -1,5 +1,6 @@
 package com.jrdm.BiblioCity.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,5 +23,6 @@ public class MultaEntity {
 
     @OneToOne
     @JoinColumn(name = "prestamo_id", nullable = false)
+    @JsonIgnore
     private PrestamoEntity prestamo;
 }

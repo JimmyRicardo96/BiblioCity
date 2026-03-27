@@ -17,12 +17,12 @@ public class PrestamoController {
     @Autowired
     private PrestamoService prestamoService;
 
-    @PostMapping("/prestamos")
+    @PostMapping
     public ResponseEntity<?> create(@RequestBody PrestamoRequestDTO dto) {
         return ResponseEntity.status(201).body(prestamoService.crearPrestamo(dto));
     }
 
-    @PostMapping("/prestamos/devolucion")
+    @PostMapping("/devolucion")
     public ResponseEntity<?> devolver(@RequestBody DevolucionRequestDTO dto) {
         return ResponseEntity.ok(prestamoService.procesarDevolucion(dto.getIdPrestamo()));
     }

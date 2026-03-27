@@ -19,7 +19,7 @@ public class DashboardController {
     @Autowired
     private MultaRepository multaRepository;
 
-    @GetMapping("/dashboard")
+    @GetMapping
     public DashboardDTO getDashboard() {
         return new DashboardDTO(
                 libroService.listarTodos(), // Aquí podrías filtrar por los más prestados

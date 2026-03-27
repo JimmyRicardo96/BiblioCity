@@ -1,5 +1,6 @@
 package com.jrdm.BiblioCity.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -30,6 +31,7 @@ public class LibroEntity {
     }
 
     @OneToMany(mappedBy = "libro")
+    @JsonIgnore
     private List<PrestamoEntity> prestamos;
 
 
