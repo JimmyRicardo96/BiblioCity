@@ -15,16 +15,39 @@ public class SocioService {
     @Autowired
     private SocioRepository socioRepository;
 
-    public List<SocioEntity> listarTodos() { return socioRepository.findAll(); }
-    public SocioEntity guardar(SocioEntity socio) { return socioRepository.save(socio); }
 
-    public void darDeBaja(Long id) {
-        SocioEntity socio = socioRepository.findById(id).orElseThrow();
-        // REGLA: No dar de baja si tiene préstamos activos
-        if (socio.getPrestamos().stream().anyMatch(p -> p.getEstado() == PrestamoEntity.EstadoPrestamo.ACTIVO)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Socio con préstamos activos no puede darse de baja");
+
+    public List<SocioEntity> listarTodos() {
+        return socioRepository.findAll();
+    }
+
+    public SocioEntity buscarPorId(Long id) {
+        return socioRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Socio no encontrado"));
+    }
+
+    public SocioEntity guardar(SocioEntity socio) {
+        return socioRepository.save(socio);
+    }
+
+    public SocioEntity actualizar(Long id, SocioEntity datos) {
+        SocioEntity socio = buscarPorId(id);
+        socio.setNombres(datos.getNombres());
+        socio.setApellidos(datos.getApellidos());
+        socio.setIdentificacion(datos.getIdentificacion());
+        return socioRepository.save(socio);
+    }
+
+    public SocioEntity darDeBaja(Long id) {
+        SocioEntity socio = buscarPorId(id);
+        boolean tienePrestamosActivos = socio.getPrestamos()
+                .stream()
+                .anyMatch(p -> p.getEstado() == PrestamoEntity.EstadoPrestamo.ACTIVO);
+        if (tienePrestamosActivos) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "El socio tiene préstamos activos, no puede darse de baja");
         }
         socio.setEstado(SocioEntity.EstadoSocio.INACTIVO);
-        socioRepository.save(socio);
+        return socioRepository.save(socio);
     }
 }

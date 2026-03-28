@@ -20,7 +20,22 @@ public class LibroService {
         return libroRepository.findAll();
     }
 
+    public LibroEntity buscarPorId(Long id) {
+        return libroRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Libro no encontrado"));
+    }
+
     public LibroEntity guardar(LibroEntity libro) {
+        return libroRepository.save(libro);
+    }
+
+    public LibroEntity actualizar(Long id, LibroEntity datos) {
+        LibroEntity libro = buscarPorId(id);
+        libro.setTitulo(datos.getTitulo());
+        libro.setAutor(datos.getAutor());
+        libro.setIsbn(datos.getIsbn());
+        libro.setEjemplaresDisponibles(datos.getEjemplaresDisponibles());
+        libro.setEstado(datos.getEstado());
         return libroRepository.save(libro);
     }
 

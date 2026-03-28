@@ -1,36 +1,28 @@
 {
   "info": {
-    "_postman_id": "7a0477a1-cb4b-4ec4-ac99-91c71738075f",
     "name": "BiblioCity API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "11000931"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
       "name": "Libros",
       "item": [
         {
-          "name": "Listar Libros",
+          "name": "GET /api/libros",
           "request": {
             "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:8080/api/libros",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "libros"
-              ]
-            }
-          },
-          "response": []
+            "url": "http://localhost:8080/api/libros"
+          }
         },
         {
-          "name": "Crear Libro",
+          "name": "GET /api/libros/{id}",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/libros/1"
+          }
+        },
+        {
+          "name": "POST /api/libros",
           "request": {
             "method": "POST",
             "header": [
@@ -43,20 +35,32 @@
               "mode": "raw",
               "raw": "{\n  \"isbn\": \"978-3-16-148410-0\",\n  \"titulo\": \"Cien Años de Soledad\",\n  \"autor\": \"Gabriel García Márquez\",\n  \"ejemplaresDisponibles\": 5,\n  \"estado\": \"ACTIVO\"\n}"
             },
-            "url": {
-              "raw": "http://localhost:8080/api/libros",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "libros"
-              ]
-            }
-          },
-          "response": []
+            "url": "http://localhost:8080/api/libros"
+          }
+        },
+        {
+          "name": "PUT /api/libros/{id}",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isbn\": \"978-3-16-148410-0\",\n  \"titulo\": \"Cien Años de Soledad (Edición 2)\",\n  \"autor\": \"Gabriel García Márquez\",\n  \"ejemplaresDisponibles\": 7,\n  \"estado\": \"ACTIVO\"\n}"
+            },
+            "url": "http://localhost:8080/api/libros/1"
+          }
+        },
+        {
+          "name": "DELETE /api/libros/{id}",
+          "request": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/api/libros/1"
+          }
         }
       ]
     },
@@ -64,27 +68,21 @@
       "name": "Socios",
       "item": [
         {
-          "name": "Listar Socios",
+          "name": "GET /api/socios",
           "request": {
             "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:8080/api/socios",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "socios"
-              ]
-            }
-          },
-          "response": []
+            "url": "http://localhost:8080/api/socios"
+          }
         },
         {
-          "name": "Crear Socio",
+          "name": "GET /api/socios/{id}",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/socios/1"
+          }
+        },
+        {
+          "name": "POST /api/socios",
           "request": {
             "method": "POST",
             "header": [
@@ -95,30 +93,56 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"identificacion\": \"1725489632\",\n  \"nombres\": \"Jimmy\",\n  \"apellidos\": \"Delgado\",\n  \"estado\": \"ACTIVO\"\n}"
+              "raw": "{\n  \"identificacion\": \"1725489632\",\n  \"nombres\": \"Juan\",\n  \"apellidos\": \"Pérez\",\n  \"estado\": \"ACTIVO\"\n}"
             },
-            "url": {
-              "raw": "http://localhost:8080/api/socios",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "socios"
-              ]
-            }
-          },
-          "response": []
+            "url": "http://localhost:8080/api/socios"
+          }
+        },
+        {
+          "name": "PUT /api/socios/{id}",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identificacion\": \"1725489632\",\n  \"nombres\": \"Juan Carlos\",\n  \"apellidos\": \"Pérez\",\n  \"estado\": \"ACTIVO\"\n}"
+            },
+            "url": "http://localhost:8080/api/socios/1"
+          }
+        },
+        {
+          "name": "PUT /api/socios/{id}/baja",
+          "request": {
+            "method": "PUT",
+            "url": "http://localhost:8080/api/socios/1/baja"
+          }
         }
       ]
     },
     {
-      "name": "Préstamos",
+      "name": "Prestamos",
       "item": [
         {
-          "name": "Crear Préstamo",
+          "name": "GET /api/prestamos",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/prestamos"
+          }
+        },
+        {
+          "name": "GET /api/prestamos/activos",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/prestamos/activos"
+          }
+        },
+        {
+          "name": "POST /api/prestamos",
           "request": {
             "method": "POST",
             "header": [
@@ -131,23 +155,11 @@
               "mode": "raw",
               "raw": "{\n  \"idSocio\": 1,\n  \"idLibro\": 1\n}"
             },
-            "url": {
-              "raw": "http://localhost:8080/api/prestamos",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "prestamos"
-              ]
-            }
-          },
-          "response": []
+            "url": "http://localhost:8080/api/prestamos"
+          }
         },
         {
-          "name": "Procesar Devolución",
+          "name": "POST /api/prestamos/devolucion",
           "request": {
             "method": "POST",
             "header": [
@@ -160,21 +172,41 @@
               "mode": "raw",
               "raw": "{\n  \"idPrestamo\": 1\n}"
             },
-            "url": {
-              "raw": "http://localhost:8080/api/prestamos/devolucion",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "prestamos",
-                "devolucion"
-              ]
-            }
-          },
-          "response": []
+            "url": "http://localhost:8080/api/prestamos/devolucion"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Multas",
+      "item": [
+        {
+          "name": "GET /api/multas",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/multas"
+          }
+        },
+        {
+          "name": "GET /api/multas/pendientes",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/multas/pendientes"
+          }
+        },
+        {
+          "name": "GET /api/multas/socio/{idSocio}",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/multas/socio/1"
+          }
+        },
+        {
+          "name": "PUT /api/multas/{id}/pagar",
+          "request": {
+            "method": "PUT",
+            "url": "http://localhost:8080/api/multas/1/pagar"
+          }
         }
       ]
     },
@@ -182,24 +214,11 @@
       "name": "Dashboard",
       "item": [
         {
-          "name": "Ver Dashboard",
+          "name": "GET /api/dashboard",
           "request": {
             "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:8080/api/dashboard",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "dashboard"
-              ]
-            }
-          },
-          "response": []
+            "url": "http://localhost:8080/api/dashboard"
+          }
         }
       ]
     }

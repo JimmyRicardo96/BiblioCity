@@ -10,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class PrestamoService {
@@ -23,6 +24,13 @@ public class PrestamoService {
     @Autowired
     private MultaRepository multaRepository;
 
+    public List<PrestamoEntity> listarTodos() {
+        return prestamoRepository.findAll();
+    }
+
+    public List<PrestamoEntity> listarActivos() {
+        return prestamoRepository.findByEstado(PrestamoEntity.EstadoPrestamo.ACTIVO);
+    }
     @Transactional
     public PrestamoEntity crearPrestamo(PrestamoRequestDTO request) {
 
